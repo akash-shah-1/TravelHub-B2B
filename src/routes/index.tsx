@@ -15,10 +15,10 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wanderlink B2B · Travel Platform" },
-      { name: "description", content: "B2B travel distribution platform with super admin and agent dashboards." },
-      { property: "og:title", content: "Wanderlink B2B · Travel Platform" },
-      { property: "og:description", content: "B2B travel distribution platform with super admin and agent dashboards." },
+      { title: "Travel-Hub · B2B Travel Distribution Platform" },
+      { name: "description", content: "Travel-Hub is a B2B travel distribution platform with super admin and agent dashboards for flight & hotel inventory, markups, wallets and KYC." },
+      { property: "og:title", content: "Travel-Hub · B2B Travel Distribution Platform" },
+      { property: "og:description", content: "Travel-Hub is a B2B travel distribution platform with super admin and agent dashboards for flight & hotel inventory, markups, wallets and KYC." },
     ],
   }),
   component: Index,
