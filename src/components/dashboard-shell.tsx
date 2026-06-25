@@ -86,15 +86,17 @@ export function DashboardShell({ children, title, subtitle }: { children: ReactN
 
       <main className="flex-1 min-w-0 flex flex-col">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
-          <div className="flex items-center justify-between gap-6 px-8 lg:px-10 py-6 pr-56">
-            <div className="min-w-0">
+          <div className="flex items-start justify-between gap-6 px-8 lg:px-10 py-6 pr-56">
+            <div className="min-w-0 flex-1">
               <h1 className="font-serif text-2xl lg:text-[26px] font-bold tracking-tight text-foreground truncate">{title}</h1>
-              {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
+              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
+                <kbd className="hidden lg:inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                  <span className="text-sm leading-none">⌘</span>K
+                  <span className="ml-1 text-muted-foreground/70">Quick search</span>
+                </kbd>
+              </div>
             </div>
-            <kbd className="hidden lg:inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground">
-              <span className="text-sm">⌘</span>K
-              <span className="ml-1 text-muted-foreground/70">Quick search</span>
-            </kbd>
           </div>
         </header>
         <div className="flex-1 px-8 lg:px-10 py-8 max-w-[1440px] w-full">{children}</div>
