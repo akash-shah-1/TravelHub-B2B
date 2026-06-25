@@ -4,6 +4,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Col<T> {
   key: string;
@@ -30,20 +31,20 @@ export function DataTable<T>({
 
   return (
     <div className="space-y-3">
-      <div className="rounded-lg border bg-card overflow-hidden">
+      <div className="rounded-lg border border-border/70 bg-card overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/40 hover:bg-muted/40">
+            <TableRow className="bg-muted/60 hover:bg-muted/60 border-b border-border/70">
               {columns.map((c) => (
-                <TableHead key={c.key} className={c.className}>{c.header}</TableHead>
+                <TableHead key={c.key} className={cn("h-11 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground", c.className)}>{c.header}</TableHead>
               ))}
             </TableRow>
           </TableHeader>
           <TableBody>
             {slice.length === 0 ? (
-              <TableRow><TableCell colSpan={columns.length} className="text-center text-muted-foreground py-10">{empty}</TableCell></TableRow>
+              <TableRow><TableCell colSpan={columns.length} className="text-center text-muted-foreground py-12">{empty}</TableCell></TableRow>
             ) : slice.map((row, i) => (
-              <TableRow key={i}>
+              <TableRow key={i} className="hover:bg-accent/40 transition-colors">
                 {columns.map((c) => (
                   <TableCell key={c.key} className={c.className}>{c.render(row)}</TableCell>
                 ))}
