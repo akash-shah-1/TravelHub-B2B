@@ -109,12 +109,49 @@ export const commissionRules = [
   { supplier: "HotelBeds", platform: 3.0, agent: 2.5, subAgent: 1.0 },
 ];
 
-export const flightResults = [
+export const airportCodes = ["DEL", "BOM", "BLR", "HYD", "CCU", "MAA", "GOI", "AMD"];
+
+export interface FlightResult {
+  id: string;
+  airline: string;
+  code: string;
+  dep: string;
+  arr: string;
+  from: string;
+  to: string;
+  duration: string;
+  stops: string;
+  net: number;
+}
+
+export const flightResults: FlightResult[] = [
   { id: "F1", airline: "IndiGo", code: "6E-2134", dep: "06:15", arr: "08:35", from: "DEL", to: "BOM", duration: "2h 20m", stops: "Non-stop", net: 4850 },
   { id: "F2", airline: "Vistara", code: "UK-995", dep: "09:40", arr: "12:05", from: "DEL", to: "BOM", duration: "2h 25m", stops: "Non-stop", net: 5320 },
   { id: "F3", airline: "Air India", code: "AI-665", dep: "13:20", arr: "15:50", from: "DEL", to: "BOM", duration: "2h 30m", stops: "Non-stop", net: 5180 },
   { id: "F4", airline: "SpiceJet", code: "SG-8167", dep: "17:50", arr: "20:15", from: "DEL", to: "BOM", duration: "2h 25m", stops: "Non-stop", net: 4620 },
   { id: "F5", airline: "Akasa Air", code: "QP-1421", dep: "21:30", arr: "23:55", from: "DEL", to: "BOM", duration: "2h 25m", stops: "Non-stop", net: 4980 },
+];
+
+export const hotelCities = ["Goa", "Jaipur", "Udaipur", "Mumbai", "Bengaluru", "Manali", "Kochi"];
+
+export interface HotelResult {
+  id: string;
+  name: string;
+  city: string;
+  area: string;
+  stars: number;
+  rating: number;
+  amenities: string[];
+  roomType: string;
+  perNightNet: number;
+}
+
+export const hotelResults: HotelResult[] = [
+  { id: "H1", name: "The Riviera Beach Resort", city: "Goa", area: "Candolim", stars: 5, rating: 4.6, amenities: ["Pool", "Breakfast", "WiFi", "Spa"], roomType: "Deluxe Sea View", perNightNet: 6800 },
+  { id: "H2", name: "Coral Stay Suites", city: "Goa", area: "Calangute", stars: 4, rating: 4.3, amenities: ["Pool", "WiFi", "Breakfast"], roomType: "Premium Room", perNightNet: 4200 },
+  { id: "H3", name: "Heritage Palace Inn", city: "Goa", area: "Panjim", stars: 4, rating: 4.1, amenities: ["WiFi", "Breakfast", "Parking"], roomType: "Heritage Suite", perNightNet: 3800 },
+  { id: "H4", name: "Sunset Sands Boutique", city: "Goa", area: "Anjuna", stars: 3, rating: 4.0, amenities: ["WiFi", "Breakfast"], roomType: "Standard Room", perNightNet: 2600 },
+  { id: "H5", name: "Azure Cliff Retreat", city: "Goa", area: "Vagator", stars: 5, rating: 4.8, amenities: ["Pool", "Spa", "WiFi", "Restaurant"], roomType: "Cliff View Villa", perNightNet: 9400 },
 ];
 
 export const invoices = [
