@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { RoleProvider, useRole } from "@/lib/role-context";
 import { RoleSwitcher } from "@/components/role-switcher";
+import { CommandPalette } from "@/components/command-palette";
 import { DashboardShell } from "@/components/dashboard-shell";
 import {
   AdminOverview, AgentManagement, KycQueue, Hierarchy,
@@ -63,6 +64,7 @@ function Index() {
   return (
     <RoleProvider>
       <RoleSwitcher />
+      <CommandPalette />
       <Inner />
     </RoleProvider>
   );

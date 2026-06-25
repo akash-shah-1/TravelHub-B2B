@@ -91,6 +91,10 @@ export function DashboardShell({ children, title, subtitle }: { children: ReactN
               <h1 className="font-serif text-2xl lg:text-[26px] font-bold tracking-tight text-foreground truncate">{title}</h1>
               {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
             </div>
+            <kbd className="hidden lg:inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground">
+              <span className="text-sm">⌘</span>K
+              <span className="ml-1 text-muted-foreground/70">Quick search</span>
+            </kbd>
           </div>
         </header>
         <div className="flex-1 px-8 lg:px-10 py-8 max-w-[1440px] w-full">{children}</div>
