@@ -11,7 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { StatusBadge } from "@/components/status-badge";
 import { DataTable } from "@/components/data-table";
 import { adminMarkupRules, commissionRules, fmtINR } from "@/lib/mock-data";
-import { Plus } from "lucide-react";
+import { Plus, ExternalLink } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function MarkupCommission() {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,8 @@ export function MarkupCommission() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div><CardTitle>Markup Rules</CardTitle><CardDescription>Platform-level markup applied on net supplier prices</CardDescription></div>
+          <div className="flex items-center gap-2">
+            <Link to="/flight-markup"><Button variant="outline" size="sm"><ExternalLink className="h-4 w-4 mr-1.5" /> Advanced Flight Markup</Button></Link>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild><Button><Plus className="h-4 w-4 mr-1.5" /> Add Rule</Button></DialogTrigger>
             <DialogContent>
@@ -58,6 +61,7 @@ export function MarkupCommission() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
           <DataTable
