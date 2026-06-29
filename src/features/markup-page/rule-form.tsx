@@ -22,8 +22,8 @@ const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 function SectionHeader({ title, hint }: { title: string; hint: string }) {
   return (
     <div className="flex items-center gap-2 mb-3">
-      <div className="h-4 w-1 rounded-full bg-blue-600" />
-      <h3 className="text-[15px] font-bold text-[#1E3A8A]">{title}</h3>
+      <div className="h-4 w-1 rounded-full bg-primary" />
+      <h3 className="text-[15px] font-bold text-primary">{title}</h3>
       <TooltipProvider delayDuration={150}>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -90,7 +90,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
     <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-center justify-between p-5 border-b border-slate-200">
         <div>
-          <h2 className="text-lg font-semibold text-[#1E3A8A]">
+          <h2 className="text-lg font-semibold text-primary">
             {isEdit ? `Edit Rule: ${draft.name || "(unnamed)"}` : "Add New Rule"}
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">Configure all parameters below, then save</p>
@@ -119,7 +119,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
                   <button key={s} type="button"
                     onClick={() => set({ status: s })}
                     className={cn("px-3 py-2 text-xs font-medium transition-colors",
-                      draft.status === s ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50")}>
+                      draft.status === s ? "bg-primary text-primary-foreground" : "bg-white text-slate-600 hover:bg-slate-50")}>
                     {s}
                   </button>
                 ))}
@@ -180,7 +180,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
               return (
                 <button key={t} type="button" onClick={() => toggleTrip(t)}
                   className={cn("px-3 py-1.5 rounded-md text-xs font-medium border transition-colors",
-                    on ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-slate-300 text-slate-700 hover:border-blue-400")}>
+                    on ? "bg-primary border-primary text-primary-foreground" : "bg-white border-slate-300 text-slate-700 hover:border-primary/50")}>
                   {t}
                 </button>
               );
@@ -230,7 +230,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
                 {DOMESTIC_CITIES.map(c => (
                   <button key={c} type="button" onClick={() => toggleCity("origins", c)}
                     className={cn("px-2.5 py-1 text-xs rounded border",
-                      draft.origins?.includes(c) ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-slate-300 text-slate-700")}>{c}</button>
+                      draft.origins?.includes(c) ? "bg-primary border-primary text-primary-foreground" : "bg-white border-slate-300 text-slate-700")}>{c}</button>
                 ))}
               </div>
             )}
@@ -240,7 +240,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
                 {[...DOMESTIC_CITIES, ...INTL_CITIES].map(c => (
                   <button key={c} type="button" onClick={() => toggleCity("destinations", c)}
                     className={cn("px-2.5 py-1 text-xs rounded border",
-                      draft.destinations?.includes(c) ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-slate-300 text-slate-700")}>{c}</button>
+                      draft.destinations?.includes(c) ? "bg-primary border-primary text-primary-foreground" : "bg-white border-slate-300 text-slate-700")}>{c}</button>
                 ))}
               </div>
             )}
@@ -267,7 +267,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
                 ))}
                 {pairs.length < 5 && (
                   <button type="button" onClick={() => { const n = [...pairs, { from: "DEL", to: "BOM" }]; setPairs(n); set({ pairs: n }); }}
-                    className="text-xs text-blue-600 hover:underline">+ Add another route pair</button>
+                    className="text-xs text-primary hover:underline">+ Add another route pair</button>
                 )}
               </div>
             )}
@@ -306,7 +306,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
                   return (
                     <button key={d} type="button" onClick={() => setDays(on ? days.filter(x => x !== d) : [...days, d])}
                       className={cn("px-3 py-1 rounded-full text-xs font-medium border",
-                        on ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-slate-300 text-slate-700")}>{d}</button>
+                        on ? "bg-primary border-primary text-primary-foreground" : "bg-white border-slate-300 text-slate-700")}>{d}</button>
                   );
                 })}
               </div>
@@ -326,7 +326,7 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
             ] as [MarkupType, string][]).map(([k, l]) => (
               <button key={k} type="button" onClick={() => set({ markupType: k })}
                 className={cn("px-3 py-2 text-xs font-medium transition-colors border-r border-slate-200 last:border-r-0",
-                  draft.markupType === k ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50")}>
+                  draft.markupType === k ? "bg-primary text-primary-foreground" : "bg-white text-slate-600 hover:bg-slate-50")}>
                 {l}
               </button>
             ))}
@@ -437,8 +437,8 @@ export function RuleForm({ draft, isEdit, onChange, onSave, onCancel, onReset }:
         <button onClick={() => { onReset(); toast("Form reset"); }} className="text-sm text-slate-500 hover:text-slate-700">Reset form</button>
         <div className="flex gap-2">
           <Button variant="outline" onClick={onCancel}>Cancel</Button>
-          <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-50" onClick={() => onSave("Draft")}>Save as Draft</Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => onSave("Active")}>Save &amp; Activate Rule</Button>
+          <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary/10" onClick={() => onSave("Draft")}>Save as Draft</Button>
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground" onClick={() => onSave("Active")}>Save &amp; Activate Rule</Button>
         </div>
       </div>
     </section>
