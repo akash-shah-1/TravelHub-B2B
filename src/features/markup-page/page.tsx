@@ -77,6 +77,10 @@ export function FlightMarkupPage() {
       <header className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-[1480px] mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-[#1E3A8A] transition">
+              <ArrowLeft className="h-3.5 w-3.5" /> Back to Dashboard
+            </Link>
+            <span className="text-slate-300">|</span>
             <div className="h-8 w-8 rounded-md bg-[#1E3A8A] grid place-items-center text-white text-sm font-bold">TH</div>
             <span className="text-sm font-semibold text-slate-700">Super Admin Panel</span>
           </div>
