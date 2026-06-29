@@ -61,6 +61,7 @@ export function MarkupCommission() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
           <DataTable
