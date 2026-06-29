@@ -21,7 +21,7 @@ export function ConflictChecker({ rules }: Props) {
   return (
     <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="p-5 border-b border-slate-200">
-        <h2 className="text-lg font-semibold text-[#1E3A8A]">Rule Conflict Checker</h2>
+        <h2 className="text-lg font-semibold text-primary">Rule Conflict Checker</h2>
         <p className="text-xs text-slate-500 mt-0.5">Check if a booking scenario matches multiple rules</p>
       </div>
       <div className="p-5 space-y-3">
@@ -74,7 +74,7 @@ export function ConflictChecker({ rules }: Props) {
             </Select>
           </Field>
         </div>
-        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setResult(findMatchingRules(rules, s))}>
+        <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={() => setResult(findMatchingRules(rules, s))}>
           Check Rules
         </Button>
 

@@ -13,7 +13,7 @@ function StatusPill({ status }: { status: RuleStatus }) {
   const map: Record<RuleStatus, string> = {
     Active: "bg-emerald-100 text-emerald-700 border-emerald-200",
     Inactive: "bg-slate-100 text-slate-600 border-slate-200",
-    Scheduled: "bg-blue-100 text-blue-700 border-blue-200",
+    Scheduled: "bg-primary/15 text-primary border-primary/20",
   };
   return <Badge variant="outline" className={cn("rounded-full font-medium", map[status])}>{status}</Badge>;
 }
@@ -59,10 +59,10 @@ export function RulesTable({ rules, onReorder, onEdit, onDuplicate, onToggle, on
     <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-center justify-between p-5 border-b border-slate-200">
         <div>
-          <h2 className="text-lg font-semibold text-[#1E3A8A]">Active Markup Rules</h2>
+          <h2 className="text-lg font-semibold text-primary">Active Markup Rules</h2>
           <p className="text-xs text-slate-500 mt-0.5">{rules.length} rules · drag to reorder priority</p>
         </div>
-        <Button onClick={onAdd} className="bg-blue-600 hover:bg-blue-700 text-white">
+        <Button onClick={onAdd} className="bg-primary hover:bg-primary/90 text-primary-foreground">
           <Plus className="h-4 w-4 mr-1.5" /> Add New Rule
         </Button>
       </div>
@@ -132,13 +132,13 @@ export function RulesTable({ rules, onReorder, onEdit, onDuplicate, onToggle, on
                 onDragStart={() => onDragStart(i)}
                 onDragOver={onDragOver}
                 onDrop={() => onDrop(i)}
-                className="group hover:bg-blue-50/40 transition-colors cursor-move"
+                className="group hover:bg-primary/5 transition-colors cursor-move"
               >
                 <TableCell className="text-slate-300 group-hover:text-slate-500"><GripVertical className="h-4 w-4" /></TableCell>
                 <TableCell className="font-semibold text-slate-700">{r.priority}</TableCell>
                 <TableCell className="font-medium text-slate-900">{r.name}
                   {r.status === "Scheduled" && r.scheduledStart && (
-                    <div className="text-[11px] text-blue-600 font-normal mt-0.5">starts {r.scheduledStart}</div>
+                    <div className="text-[11px] text-primary font-normal mt-0.5">starts {r.scheduledStart}</div>
                   )}
                 </TableCell>
                 <TableCell className="text-sm text-slate-600">{r.appliesToLabel}</TableCell>

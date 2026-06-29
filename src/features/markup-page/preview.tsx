@@ -29,7 +29,7 @@ export function PreviewCalculator({ activeRule }: Props) {
   return (
     <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="p-5 border-b border-slate-200">
-        <h2 className="text-lg font-semibold text-[#1E3A8A]">Live Markup Preview</h2>
+        <h2 className="text-lg font-semibold text-primary">Live Markup Preview</h2>
         <p className="text-xs text-slate-500 mt-0.5">See exactly what each party pays and earns</p>
       </div>
 
@@ -44,7 +44,7 @@ export function PreviewCalculator({ activeRule }: Props) {
             {tripOptions.map(t => (
               <button key={t} type="button" onClick={() => setInput(s => ({ ...s, tripType: t }))}
                 className={cn("flex-1 px-2 py-1.5 text-xs font-medium",
-                  input.tripType === t ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50")}>{t}</button>
+                  input.tripType === t ? "bg-primary text-primary-foreground" : "bg-white text-slate-600 hover:bg-slate-50")}>{t}</button>
             ))}
           </div>
         </div>
@@ -110,7 +110,7 @@ function Row({ label, value, tone, bold, size, small }: {
 }) {
   const toneMap = {
     muted: "bg-slate-50 text-slate-600",
-    blue: "bg-blue-50 text-blue-800",
+    blue: "bg-primary/10 text-primary",
     dark: "bg-slate-900 text-white",
     purple: "bg-purple-50 text-purple-800",
     green: "bg-emerald-50 text-emerald-800",

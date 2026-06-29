@@ -1,123 +1,26 @@
-import { useState } from "react";
-import { toast } from "sonner";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { RulesTable } from "./rules-table";
-import { RuleForm } from "./rule-form";
-import { PreviewCalculator } from "./preview";
-import { ConflictChecker } from "./conflict-checker";
-import { initialRules, emptyDraft, type FlightMarkupRule } from "./data";
-
-function makeValueLabel(r: FlightMarkupRule): string {
-  const per = r.applyMode === "sector" ? "/sector" : "/booking";
-  switch (r.markupType) {
-    case "Flat": return `₹${r.flatAmount ?? 0} flat${per}`;
-    case "Percentage": return `${r.pctAmount ?? 0}% of net fare`;
-    case "FlatPct": return `₹${r.flatAmount ?? 0} flat + ${r.pctAmount ?? 0}%`;
-    case "PerPax": return `Per-pax markup`;
-  }
-}
+import { MarkupWorkspace } from "./workspace";
 
 export function FlightMarkupPage() {
-  const [rules, setRules] = useState<FlightMarkupRule[]>(initialRules);
-  const [draft, setDraft] = useState<FlightMarkupRule>({ ...emptyDraft, id: "new" });
-  const [editingId, setEditingId] = useState<string | null>(null);
-
-  const handleEdit = (r: FlightMarkupRule) => {
-    setEditingId(r.id);
-    setDraft({ ...r });
-    document.getElementById("rule-form-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleDuplicate = (r: FlightMarkupRule) => {
-    const copy: FlightMarkupRule = { ...r, id: `R${Date.now()}`, name: `${r.name} (copy)`, priority: rules.length + 1 };
-    setRules([...rules, copy]);
-    toast.success("Rule duplicated");
-  };
-
-  const handleToggle = (id: string) => {
-    setRules(rs => rs.map(r => r.id === id ? { ...r, status: r.status === "Active" ? "Inactive" : "Active" } : r));
-    toast.success("Status updated");
-  };
-
-  const handleAdd = () => {
-    setEditingId(null);
-    setDraft({ ...emptyDraft, id: "new", priority: rules.length + 1 });
-    document.getElementById("rule-form-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleSave = (mode: "Active" | "Draft") => {
-    if (!draft.name.trim()) { toast.error("Rule name is required"); return; }
-    const finalRule: FlightMarkupRule = {
-      ...draft,
-      valueLabel: makeValueLabel(draft),
-      status: mode === "Draft" ? "Inactive" : draft.status,
-    };
-    if (editingId) {
-      setRules(rs => rs.map(r => r.id === editingId ? { ...finalRule, id: editingId } : r));
-      toast.success(mode === "Draft" ? "Saved as draft" : "Rule updated & activated");
-    } else {
-      setRules([...rules, { ...finalRule, id: `R${Date.now()}` }]);
-      toast.success(mode === "Draft" ? "Draft created" : "Rule created & activated");
-    }
-    setEditingId(null);
-    setDraft({ ...emptyDraft, id: "new", priority: rules.length + 2 });
-  };
-
-  const handleCancel = () => {
-    setEditingId(null);
-    setDraft({ ...emptyDraft, id: "new", priority: rules.length + 1 });
-  };
-
-  const activeForPreview = rules.find(r => r.status === "Active") ?? null;
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Top navbar */}
-      <header className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm">
+    <div className="min-h-screen bg-background">
+      <header className="sticky top-0 z-20 bg-card border-b border-border shadow-sm">
         <div className="max-w-[1480px] mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-[#1E3A8A] transition">
+            <Link to="/" className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition">
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Dashboard
             </Link>
-            <span className="text-slate-300">|</span>
-            <div className="h-8 w-8 rounded-md bg-[#1E3A8A] grid place-items-center text-white text-sm font-bold">TH</div>
-            <span className="text-sm font-semibold text-slate-700">Super Admin Panel</span>
+            <span className="text-border">|</span>
+            <div className="h-8 w-8 rounded-md bg-primary grid place-items-center text-primary-foreground text-sm font-bold">TH</div>
+            <span className="text-sm font-semibold text-foreground">Super Admin Panel</span>
           </div>
-          <h1 className="text-base font-semibold text-[#1E3A8A]">Flight Markup Rules</h1>
-          <div className="text-xs text-slate-500">admin@travel-hub.in</div>
+          <h1 className="text-base font-semibold text-primary font-serif">Flight Markup Rules</h1>
+          <div className="text-xs text-muted-foreground">admin@travel-hub.in</div>
         </div>
       </header>
-
-      <main className="max-w-[1480px] mx-auto px-6 py-6 grid grid-cols-12 gap-6">
-        {/* Left column 65% */}
-        <div className="col-span-8 space-y-6">
-          <RulesTable
-            rules={rules}
-            onReorder={setRules}
-            onEdit={handleEdit}
-            onDuplicate={handleDuplicate}
-            onToggle={handleToggle}
-            onAdd={handleAdd}
-          />
-          <div id="rule-form-anchor" />
-          <RuleForm
-            draft={draft}
-            isEdit={!!editingId}
-            onChange={setDraft}
-            onSave={handleSave}
-            onCancel={handleCancel}
-            onReset={() => setDraft({ ...emptyDraft, id: "new", priority: rules.length + 1 })}
-          />
-        </div>
-
-        {/* Right column 35% — sticky */}
-        <aside className="col-span-4 space-y-6">
-          <div className="sticky top-20 space-y-6">
-            <PreviewCalculator activeRule={editingId ? draft : activeForPreview} />
-            <ConflictChecker rules={rules} />
-          </div>
-        </aside>
+      <main className="max-w-[1480px] mx-auto px-6 py-6">
+        <MarkupWorkspace stickyTopClass="top-20" />
       </main>
     </div>
   );
